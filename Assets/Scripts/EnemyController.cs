@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     public Animator animator;
+
+	private bool deadState = false;
     
     void Start()
     {
@@ -18,7 +20,12 @@ public class EnemyController : MonoBehaviour
 
     public void Dead()
     {
-        animator.SetBool("isDead", true);
-        Debug.Log("Enemy is dead");
+		if (!deadState)
+		{
+			animator.SetBool("isDead", true);
+			Debug.Log("Enemy is dead");
+			deadState = true;
+		}
+        
     }
 }

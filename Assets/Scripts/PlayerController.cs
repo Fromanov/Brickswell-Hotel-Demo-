@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     public Animator legsAnimator;
     public float speed = 5f;
     public GameObject mele;
-    public GameObject mask;
-    public GameObject weapon;
+    public string mask;
+    public string weapon;
 
     private Rigidbody2D rb2d;
     private Vector2 movement;
@@ -29,31 +29,46 @@ public class PlayerController : MonoBehaviour
 
         mele.SetActive(false);
 
-        animator.SetFloat("Speed", Mathf.Abs(movement.x));
+        
         animator.SetBool("Attack", false);
         legsAnimator.SetBool("isMoving", false);
 
         if (Input.GetMouseButtonDown(0))
         {
             animator.SetBool("Attack", true);
-            mele.SetActive(true);
-        }
+            //mele.SetActive(true);
+			//Invoke(mele.SetActive(true), 1);
+			//yield WaitForSeconds(2);
+		}
 
-        /*if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("Right mouse button down");
-            Collider2D pickup = ;
-            if (weapon == null)
+
+			//MeleSystem pickup;
+
+            if (weapon == "Empty")
             {
-                PickUpWeapon(pickup);
+				//this.weapon = pickup.gameObject.name;
+				Debug.Log("Empty hands");
             }
            
-        }*/
+        }
 
-        if (Mathf.Abs(movement.x) != 0 || Mathf.Abs(movement.y) != 0)
+        if (Mathf.Abs(movement.x) != 0)
         {
             legsAnimator.SetBool("isMoving", true);
-        }        
+			animator.SetFloat("Speed", Mathf.Abs(movement.x));
+		} 
+		else if (Mathf.Abs(movement.y) != 0)
+		{
+			legsAnimator.SetBool("isMoving", true);
+			animator.SetFloat("Speed", Mathf.Abs(movement.y));
+		}
+		else
+		{
+			animator.SetFloat("Speed", 0);
+		}
     }
     
     void FixedUpdate()

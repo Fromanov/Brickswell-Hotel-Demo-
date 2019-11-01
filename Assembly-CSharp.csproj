@@ -60,7 +60,7 @@
      <Compile Include="Assets\Scripts\MeleSystem.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerMovemrnt.cs" />
-     <Compile Include="Assets\Scripts\weaponController.cs" />
+     <Compile Include="Assets\Scripts\WeaponController.cs" />
      <None Include="Assets\NewSurfaceShader.shader" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/VrlabdvDev1/Desktop/Froman/Brickswell Hotel (Demo)/Brickswell Hotel/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

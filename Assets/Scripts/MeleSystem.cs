@@ -23,11 +23,6 @@ public class MeleSystem : MonoBehaviour
             Debug.Log("Enemy collided");
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             enemy.Dead();
-        }
-
-		if (other.gameObject.CompareTag("Weapon"))
-		{
-			Debug.Log("Weapon collided");
-		}
+        }		
     }
 }

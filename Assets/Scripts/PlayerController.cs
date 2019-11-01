@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public GameObject mele;
     public string mask;
     public string weapon;
+	public GameObject mainCamera;	
 
-    private Rigidbody2D rb2d;
+	private Rigidbody2D rb2d;
     private Vector2 movement;
     private Vector2 mousePos;
+	private Collider2D collidedItem;
 
     void Start()
     {
@@ -33,27 +35,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("Attack", false);
         legsAnimator.SetBool("isMoving", false);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetBool("Attack", true);
-            //mele.SetActive(true);
-			//Invoke(mele.SetActive(true), 1);
-			//yield WaitForSeconds(2);
-		}
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("Right mouse button down");
-
-			//MeleSystem pickup;
-
-            if (weapon == "Empty")
-            {
-				//this.weapon = pickup.gameObject.name;
-				Debug.Log("Empty hands");
-            }
-           
-        }
+		MouseButtonsClick();		
 
         if (Mathf.Abs(movement.x) != 0)
         {
@@ -79,21 +62,26 @@ public class PlayerController : MonoBehaviour
         var angle = Mathf.Atan2(mouseDir.y, mouseDir.x) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }   
-
-    void PickUpWeapon(Collider2D collision)
-    {
-        switch (collision.name)
-        {
-            case "gaybar":
-            Debug.Log("gaybar picked up");
-            break;
-        }
     }
 
-    void OnCollisionEnter2D (Collision2D collision)
-    {
-        
-        Debug.Log("Here " + collision.collider.name);
-    }
+	public void OnTriggerEnter2D(Collider2D other)
+	{
+		collidedItem = other;
+	}
+
+	public void MouseButtonsClick()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			animator.SetBool("Attack", true);
+			mele.SetActive(true);			
+		}
+
+		if (Input.GetMouseButtonDown(1))
+		{
+			Debug.Log("Right mouse button down");
+
+			this.weapon = collidedItem.name;
+		}
+	}
 }

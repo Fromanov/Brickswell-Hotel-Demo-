@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement;
     private Vector2 mousePos;
 	private Collider2D collidedItem;
+	private int currWeapon = 0;
 
-    void Start()
+
+	void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -74,6 +76,7 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			animator.SetBool("Attack", true);
+			animator.SetInteger("Weapon", currWeapon);
 			mele.SetActive(true);			
 		}
 
@@ -82,6 +85,18 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("Right mouse button down");
 
 			this.weapon = collidedItem.name;
+			
+			switch(this.weapon)
+			{
+				case "Knife":
+					currWeapon = 1;
+					break;
+				case "Bat":
+					currWeapon = 2;
+					break;
+			}
+
+			animator.SetInteger("Weapon", currWeapon);
 		}
 	}
 }

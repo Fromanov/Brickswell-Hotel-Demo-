@@ -75,8 +75,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
-			animator.SetBool("Attack", true);
-			animator.SetInteger("Weapon", currWeapon);
+			animator.SetBool("Attack", true);			
 			mele.SetActive(true);			
 		}
 
